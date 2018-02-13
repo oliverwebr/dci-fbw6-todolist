@@ -62,7 +62,7 @@ class ToDo {
     localStorage.setItem('todoList', JSON.stringify(this.items));
   }
 
-  //
+  // updates the array & storage with the edited ToDo text
   saveEditedText(index, text) {
     this.items[index].toDoText = text;
     this.updateList();
@@ -141,6 +141,7 @@ class UI {
     }, 2500);
   }
 
+  // TODO: combine displayError() and displaySuccess() into one method
   displaySuccess(successMsg, item = '') {
     const errorDiv = document.createElement('div');
     errorDiv.classList = 'alert alert-success col-4';
