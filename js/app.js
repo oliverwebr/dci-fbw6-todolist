@@ -18,12 +18,22 @@ class ToDo {
 
   // adds ToDo item to array
   addItem(itemToAdd) {
-    const item = {
-      toDoText: itemToAdd,
-      important: false
-    };
-    this.items.push(item);
-    this.updateList();
+    if (!this.checkDuplicates(itemToAdd)) {
+      const item = {
+        toDoText: itemToAdd,
+        important: false
+      };
+      this.items.push(item);
+      this.updateList();
+    } else {
+      // throws error if item is a duplicate
+      ui.displayError('duplicate', itemToAdd);
+    }
+  }
+
+  // checks for duplicate entries
+  checkDuplicates(itemText) {
+    return this.items.some(item => itemText.toLowerCase() === item.toDoText.toLowerCase());
   }
 
   // delete item from array
@@ -61,6 +71,7 @@ class UI {
   constructor() {
     this.elements = {
       listContainer: document.querySelector('.itemList'),
+      errorDiv: document.querySelector('#errordiv')
     };
   }
 
@@ -114,6 +125,18 @@ class UI {
     const li = this.elements.listContainer.querySelector(`[data-id='${id}']`);
     li.classList.toggle('list-group-item-primary');
   }
+
+  // displays various error msg. Expects type of error as first parameter
+  displayError(errorMsg, item = '') {
+    const errorDiv = document.createElement('div');
+    errorDiv.classList = 'alert alert-danger col-4';
+    if (errorMsg === 'duplicate') errorDiv.innerHTML = `${item} already in list!`;
+    if (errorMsg === 'empty') errorDiv.innerHTML = 'Doing nothing doesn\'t count!';
+    this.elements.errorDiv.appendChild(errorDiv);
+    setTimeout(() => {
+      errorDiv.remove();
+    }, 2500);
+  }
 }
 
 
@@ -135,8 +158,10 @@ class Controller {
     const addBtn = document.querySelector('#addToDoBtn');
     const input = document.querySelector('#toDoInput');
     addBtn.addEventListener('click', () => {
-      toDo.addItem(input.value);
-      input.value = '';
+      if (input.value) {
+        toDo.addItem(input.value);
+        input.value = '';
+      } else ui.displayError('empty');
     });
   }
 
