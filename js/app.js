@@ -1,3 +1,4 @@
+// handles main functionality of ToDo list
 class ToDo {
   constructor() {
     // list of todo items
@@ -9,6 +10,7 @@ class ToDo {
     this.updateList();
   }
 
+  // update list on changes
   updateList() {
     ui.displayListItems(this.items);
     this.saveList();
@@ -26,12 +28,19 @@ class ToDo {
     this.updateList();
   }
 
+  // deletes all items from array
+  deleteAllItems() {
+    this.items = [];
+    this.updateList();
+  }
+
   // save items to localstorage
   saveList() {
     localStorage.setItem('todoList', JSON.stringify(this.items));
   }
 }
 
+// handles everything browser display related
 class UI {
   constructor() {
     this.elements = {
@@ -41,18 +50,27 @@ class UI {
 
   // displays ToDo Items in browser
   displayListItems(list) {
-    this.elements.listContainer.innerHTML = '';
+    const ul = this.elements.listContainer;
+    ul.innerHTML = '';
     list.forEach((item, index) => {
-      this.elements.listContainer.innerHTML += `
-      <li data-id="${index}" class="list-group-item faded">
+      ul.innerHTML += `
+      <li data-id="${index}" class="list-group-item">
         <span class="todo_item">${item}</span>
         <i class="fa fa-trash todo_delete" aria-hidden="true"></i>
       </li>
       `;
     });
+    if (list.length > 0) {
+      ul.innerHTML += `
+      <button class="btn btn-danger todo_deleteAll">Delete all
+        <i class="fa fa-trash " aria-hidden="true"></i>
+      </li>`;
+    }
   }
 }
 
+
+// handles all events
 class Controller {
   constructor() {
     Controller.init();
@@ -79,6 +97,8 @@ class Controller {
     ui.elements.listContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('todo_delete')) {
         toDo.deleteItem(e.target.parentElement.dataset.id);
+      } else if (e.target.classList.contains('todo_deleteAll')) {
+        toDo.deleteAllItems();
       }
     });
   }
