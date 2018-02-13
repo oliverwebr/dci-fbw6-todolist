@@ -1,7 +1,7 @@
 # TODO LIST
 ## Features
 - Add tasks
-- task -> maked as done
+- task -> marked as done
 - task -> delete
 
 ## Elements
