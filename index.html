@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>TODO - List</title>
+   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+ </head>
+ <body>
+
+   <div class="container my-3">
+     <h1>Add Todo:</h1>
+     <!-- here comes the form -->
+     <form action="#" class="form-inline mb-5">
+         <div class="form-group">
+             <input type="text" class="form-control mr-2 w-100" value="<!-- Milk, 1L" id="todo" aria-describedby="emailHelp" name="todo" placeholder="Buy Milk">
+         </div>
+         <button type="submit" class="btn btn-primary">submit</button>
+     </form>
+     <h1>Todos:</h1>
+     <!-- here comes the list of todos -->
+     <ul id="target" class="list-group"></ul>
+     <li id="template" class="list-group-item d-none justify-content-between align-items-center">
+     <span class="title">Cras justo odio</span>
+     <button class="btn-outline-danger">X</button>
+     </li>
+   </div>
+   <script src="node_modules/jquery/jquery.min.js" charset="utf-8"></script>
+   <script src="node_modules/popper.js/dist/umd/popper.js" charset="utf-8"></script>
+   <script src="node_modules/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
+   <script src="index.js"></script>
+ </body>
+</html>
