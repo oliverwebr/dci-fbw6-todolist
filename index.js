@@ -19,10 +19,9 @@ class toDo {
 			template_clone.classList.remove('d-none');
 			template_clone.innerHTML = this.elements.input.value;
 			this.elements.target.appendChild(template_clone);
-
+			this.elements.input.value = "";
 		})
 	}
 }
-
-
 var instaceOfCart = new toDo();
+
