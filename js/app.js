@@ -1,7 +1,7 @@
 class ToDo {
   constructor() {
     // list of todo items
-    this.items = ['Test1', 'TEst2'];
+    this.items = JSON.parse(localStorage.getItem('todoList')) || [];
     this.init();
   }
 
@@ -11,6 +11,7 @@ class ToDo {
 
   updateList() {
     ui.displayListItems(this.items);
+    this.saveList();
   }
 
   // adds ToDo item to array
@@ -23,6 +24,11 @@ class ToDo {
   deleteItem(itemIndex) {
     this.items.splice(itemIndex, 1);
     this.updateList();
+  }
+
+  // save items to localstorage
+  saveList() {
+    localStorage.setItem('todoList', JSON.stringify(this.items));
   }
 }
 
@@ -38,7 +44,7 @@ class UI {
     this.elements.listContainer.innerHTML = '';
     list.forEach((item, index) => {
       this.elements.listContainer.innerHTML += `
-      <li data-id="${index}" class="list-group-item">
+      <li data-id="${index}" class="list-group-item faded">
         <span class="todo_item">${item}</span>
         <i class="fa fa-trash todo_delete" aria-hidden="true"></i>
       </li>
