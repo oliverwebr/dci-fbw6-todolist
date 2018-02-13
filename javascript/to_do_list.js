@@ -18,6 +18,7 @@ class createTask {
 		this.elements.goal.appendChild(list);
 		});
 	}
+	
 }
 
 var newTask = new createTask();
