@@ -12,23 +12,15 @@
       <label for="todo">Title</label>
       <form action="#" class=" form-inline mb-5">
         <div class="form-group">
-          <input type="email" class="form-control mr-2 w-100" id="todo" aria-describedby="emailHelp" name="todo" placeholder="Buy milk">
+          <input type="text" class="form-control mr-2 w-100" value="milk" id="input" aria-describedby="emailHelp" name="input" placeholder="Buy milk">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
       <h1>Todos:</h1>
       <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Cras justo odio
-          <button class="btn-outline-danger">X</button>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Dapibus ac facilisis in
-          <button class="btn-outline-danger">X</button>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Morbi leo risus
+        <li id="template" class="list-group-item d-none justify-content-between align-items-center">
+          <span class="title">Cras justo odio</span>
           <button class="btn-outline-danger">X</button>
         </li>
       </ul>
