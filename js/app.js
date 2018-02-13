@@ -18,7 +18,11 @@ class ToDo {
 
   // adds ToDo item to array
   addItem(itemToAdd) {
-    this.items.push(itemToAdd);
+    const item = {
+      toDoText: itemToAdd,
+      important: false
+    };
+    this.items.push(item);
     this.updateList();
   }
 
@@ -31,6 +35,12 @@ class ToDo {
   // deletes all items from array
   deleteAllItems() {
     this.items = [];
+    this.updateList();
+  }
+
+  // marks item as important
+  flagImportant(id) {
+    this.items[id].important = !this.items[id].important;
     this.updateList();
   }
 
@@ -53,19 +63,28 @@ class UI {
     const ul = this.elements.listContainer;
     ul.innerHTML = '';
     list.forEach((item, index) => {
+      let important = '';
+      if (item.important) important = 'list-group-item-primary';
       ul.innerHTML += `
-      <li data-id="${index}" class="list-group-item">
-        <span class="todo_item">${item}</span>
+      <li data-id='${index}' class="list-group-item ${important}">
+        <span class="todo_item">${item.toDoText}</span>
         <i class="fa fa-trash todo_delete" aria-hidden="true"></i>
       </li>
       `;
     });
+    // displays delete all Button if there are list items
     if (list.length > 0) {
       ul.innerHTML += `
       <button class="btn btn-danger todo_deleteAll">Delete all
         <i class="fa fa-trash " aria-hidden="true"></i>
       </li>`;
     }
+  }
+
+  // displays item as important
+  toggleImportant(id) {
+    const li = document.querySelector(`[data-id='${id}']`);
+    li.classList.toggle('list-group-item-primary');
   }
 }
 
@@ -80,6 +99,7 @@ class Controller {
   static init() {
     Controller.addToDoListener();
     Controller.delToDoListener();
+    Controller.itemListener();
   }
 
   // listens to clicks on Add ToDo Button
@@ -99,6 +119,16 @@ class Controller {
         toDo.deleteItem(e.target.parentElement.dataset.id);
       } else if (e.target.classList.contains('todo_deleteAll')) {
         toDo.deleteAllItems();
+      }
+    });
+  }
+
+  // listens to clicks in li items
+  static itemListener() {
+    ui.elements.listContainer.addEventListener('click', (e) => {
+      if (e.target.nodeName === 'LI') {
+        ui.toggleImportant(e.target.dataset.id);
+        toDo.flagImportant(e.target.dataset.id);
       }
     });
   }
