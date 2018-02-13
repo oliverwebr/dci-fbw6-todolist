@@ -25,6 +25,7 @@ class ToDo {
       };
       this.items.push(item);
       this.updateList();
+      ui.displaySuccess('add', itemToAdd);
     } else {
       // throws error if item is a duplicate
       ui.displayError('duplicate', itemToAdd);
@@ -38,6 +39,7 @@ class ToDo {
 
   // delete item from array
   deleteItem(itemIndex) {
+    ui.displaySuccess('delete', this.items[itemIndex].toDoText);
     this.items.splice(itemIndex, 1);
     this.updateList();
   }
@@ -46,6 +48,7 @@ class ToDo {
   deleteAllItems() {
     this.items = [];
     this.updateList();
+    ui.displaySuccess('deleteAll');
   }
 
   // marks item as important
@@ -130,8 +133,20 @@ class UI {
   displayError(errorMsg, item = '') {
     const errorDiv = document.createElement('div');
     errorDiv.classList = 'alert alert-danger col-4';
-    if (errorMsg === 'duplicate') errorDiv.innerHTML = `${item} already in list!`;
+    if (errorMsg === 'duplicate') errorDiv.innerHTML = `${item} is already in your list!`;
     if (errorMsg === 'empty') errorDiv.innerHTML = 'Doing nothing doesn\'t count!';
+    this.elements.errorDiv.appendChild(errorDiv);
+    setTimeout(() => {
+      errorDiv.remove();
+    }, 2500);
+  }
+
+  displaySuccess(successMsg, item = '') {
+    const errorDiv = document.createElement('div');
+    errorDiv.classList = 'alert alert-success col-4';
+    if (successMsg === 'add') errorDiv.innerHTML = `${item} successfully added to list!`;
+    if (successMsg === 'delete') errorDiv.innerHTML = `${item} successfully deleted from list!`;
+    if (successMsg === 'deleteAll') errorDiv.innerHTML = 'Whole list successfully deleted!';
     this.elements.errorDiv.appendChild(errorDiv);
     setTimeout(() => {
       errorDiv.remove();
