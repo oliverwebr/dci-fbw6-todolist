@@ -82,7 +82,7 @@ class UI {
       </li>
       `;
     });
-    // displays delete all Button if there are list items
+    // displays delete-all Button only if there are list items present
     if (list.length > 0) {
       ul.innerHTML += `
       <button class="btn btn-danger todo_deleteAll">Delete all
@@ -94,13 +94,16 @@ class UI {
   // makes item ToDo text editable
   editText(id) {
     const li = this.elements.listContainer.querySelector(`[data-id='${id}']`);
-    if (li.contentEditable !== 'true') {
-      li.contentEditable = 'true';
-      li.style.color = 'green';
+    const todoText = li.querySelector('.todo_item');
+    if (todoText.contentEditable !== 'true') {
+      todoText.contentEditable = 'true';
+      todoText.style.backgroundColor = 'green';
+      todoText.style.color = 'white';
       li.querySelector('.fa-pencil').classList = 'fa fa-check-circle todo_edit';
     } else {
-      li.contentEditable = 'false';
-      li.style.color = 'black';
+      todoText.contentEditable = 'false';
+      todoText.style.backgroundColor = 'inherit';
+      todoText.style.color = 'inherit';
       li.querySelector('.fa-check-circle').classList = 'fa fa-pencil todo_edit';
       toDo.saveEditedText(id, li.innerText);
     }

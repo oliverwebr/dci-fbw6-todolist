@@ -1,7 +1,6 @@
 li {
     display: flex !important;
     justify-content: space-between;
-    cursor: pointer;
 }
 
 li:hover {
