@@ -1,1 +1,4 @@
-.flex-grow{flex-grow:1}.pointer-events-none{pointer-events:none}#products>.card,#result>li,.summary b{animation:fadein 0.5s;transition:opacity .5s ease;opacity:1}.faders{transition:opacity .5s ease}.faded{opacity:0}img{height:33% !important;max-height:33% !important;width:auto !important}.card{flex:1}.dropdown-cart{width:300px !important}.dropdown-currency{min-width:40px !important;width:40px !important;text-align:center}.currency i{cursor:pointer}.card-footer{display:flex;align-items:center;justify-content:space-between}@keyframes fadein{from{opacity:0}to{opacity:1}}
+li {
+    display: flex !important;
+    justify-content: space-between;
+}
