@@ -63,8 +63,9 @@ class UI {
     const ul = this.elements.listContainer;
     ul.innerHTML = '';
     list.forEach((item, index) => {
-      let important = '';
-      if (item.important) important = 'list-group-item-primary';
+      // checks if list item should be displayed as important
+      const important = item.important ? 'list-group-item-primary' : '';
+      // creates list item
       ul.innerHTML += `
       <li data-id='${index}' class="list-group-item ${important}">
         <span class="todo_item">${item.toDoText}</span>
