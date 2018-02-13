@@ -48,6 +48,12 @@ class ToDo {
   saveList() {
     localStorage.setItem('todoList', JSON.stringify(this.items));
   }
+
+  //
+  saveEditedText(index, text) {
+    this.items[index].toDoText = text;
+    this.updateList();
+  }
 }
 
 // handles everything browser display related
@@ -69,7 +75,10 @@ class UI {
       ul.innerHTML += `
       <li data-id='${index}' class="list-group-item ${important}">
         <span class="todo_item">${item.toDoText}</span>
-        <i class="fa fa-trash todo_delete" aria-hidden="true"></i>
+        <span>
+          <i class="fa fa-pencil todo_edit" aria-hidden="true"></i>
+          <i class="fa fa-trash todo_delete" aria-hidden="true"></i>
+        </span>
       </li>
       `;
     });
@@ -82,9 +91,24 @@ class UI {
     }
   }
 
+  // makes item ToDo text editable
+  editText(id) {
+    const li = this.elements.listContainer.querySelector(`[data-id='${id}']`);
+    if (li.contentEditable !== 'true') {
+      li.contentEditable = 'true';
+      li.style.color = 'green';
+      li.querySelector('.fa-pencil').classList = 'fa fa-check-circle todo_edit';
+    } else {
+      li.contentEditable = 'false';
+      li.style.color = 'black';
+      li.querySelector('.fa-check-circle').classList = 'fa fa-pencil todo_edit';
+      toDo.saveEditedText(id, li.innerText);
+    }
+  }
+
   // displays item as important
   toggleImportant(id) {
-    const li = document.querySelector(`[data-id='${id}']`);
+    const li = this.elements.listContainer.querySelector(`[data-id='${id}']`);
     li.classList.toggle('list-group-item-primary');
   }
 }
@@ -117,9 +141,11 @@ class Controller {
   static delToDoListener() {
     ui.elements.listContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('todo_delete')) {
-        toDo.deleteItem(e.target.parentElement.dataset.id);
+        toDo.deleteItem(e.target.parentElement.parentElement.dataset.id);
       } else if (e.target.classList.contains('todo_deleteAll')) {
         toDo.deleteAllItems();
+      } else if (e.target.classList.contains('todo_edit')) {
+        ui.editText(e.target.parentElement.parentElement.dataset.id);
       }
     });
   }
