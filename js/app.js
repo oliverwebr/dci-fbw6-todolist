@@ -1,7 +1,7 @@
 class ToDo {
   constructor() {
     // list of todo items
-    this.items = ['Test1', 'TEst2', 'Test3'];
+    this.items = ['Test1', 'TEst2'];
     this.init();
   }
 
@@ -18,6 +18,12 @@ class ToDo {
     this.items.push(itemToAdd);
     this.updateList();
   }
+
+  // delete item from array
+  deleteItem(itemIndex) {
+    this.items.splice(itemIndex, 1);
+    this.updateList();
+  }
 }
 
 class UI {
@@ -27,11 +33,12 @@ class UI {
     };
   }
 
+  // displays ToDo Items in browser
   displayListItems(list) {
     this.elements.listContainer.innerHTML = '';
-    list.forEach((item) => {
+    list.forEach((item, index) => {
       this.elements.listContainer.innerHTML += `
-      <li class="list-group-item">
+      <li data-id="${index}" class="list-group-item">
         <span class="todo_item">${item}</span>
         <i class="fa fa-trash todo_delete" aria-hidden="true"></i>
       </li>
@@ -48,6 +55,7 @@ class Controller {
   // initialize all event listeners
   static init() {
     Controller.addToDoListener();
+    Controller.delToDoListener();
   }
 
   // listens to clicks on Add ToDo Button
@@ -57,6 +65,15 @@ class Controller {
     addBtn.addEventListener('click', () => {
       toDo.addItem(input.value);
       input.value = '';
+    });
+  }
+
+  // listens to clicks on delete todo button
+  static delToDoListener() {
+    ui.elements.listContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('todo_delete')) {
+        toDo.deleteItem(e.target.parentElement.dataset.id);
+      }
     });
   }
 }

@@ -2,3 +2,7 @@ li {
     display: flex !important;
     justify-content: space-between;
 }
+
+li i {
+    cursor: pointer;
+}
