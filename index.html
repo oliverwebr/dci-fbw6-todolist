@@ -2,20 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>TODO - List</title>
+    <title>TO-DO List</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
   <body>
 
-    <div class="container my-3">
-      <h1>Add A To-do:</h1>
-      <!-- here comes the form -->
-      <h1>To-dos:</h1>
-      <!-- here comes the list of todos --> 
+    <div class="container">
+	    <div class="card1">
+	    	<h1>Add A To-do Item:</h1>
+			<!-- here comes the form -->
+
+	    	<form action="#" class="form-inline mb-5">
+	      		<div class="form-group">
+	      		<input type="text" class="form-control mr-2 w-100" value="" id="todo" aria-describedby="emailHelp" name="todo" placeholder="">
+	      		</div>
+	      		<button type="submit" class="btn btn-primary" id="itemSubmit">submit</button>
+	    	</form>
+	    </div>
+	    <div class="card2" id="printThis">
+	    	<h1>To-dos:</h1>
+	    	<!-- here comes the list of todos --> 
+	    	<ul id="toDoList" class="list-group">
+
+			</ul>
+			<button id="clearBtn" class="btn">Clear List</button> <button class="printThisBtn btn">Print List</button>
+		</div>
     </div>
     <script src="node_modules/jquery/jquery.min.js" charset="utf-8"></script>
     <script src="node_modules/popper.js/dist/umd/popper.js" charset="utf-8"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
-    <script src="index.js"></script>
+    <script src="assets/javascript/index.js"></script>
   </body>
 </html>
