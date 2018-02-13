@@ -4,19 +4,35 @@
     <meta charset="utf-8">
     <title>TO DO LIST</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
 
     <div class="container my-3">
-      <h1>Add Todo:</h1>
+      <h3>Add Task</h3>
       <!-- here comes the form -->
-      <h1>Todos:</h1>
-      <!-- here comes the list of todos --> 
+     	<form>
+      		<div class="form-group">
+    			<label for="exampleFormControlTextarea1">Here you can add a new task</label>
+    			<input class="form-control" id="textarea" rows="1" placeholder="New Task">
+ 			</div>
+ 			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+
+      <h3>To Do</h3>
+      <!-- here comes the list of todos -->
+      	<ul id="new_list" class="list-group">
+<!--   			<li class="list-group-item"></li>
+  			<li class="list-group-item"></li>
+ 			<li class="list-group-item"></li>
+  			<li class="list-group-item"></li>
+  			<li class="list-group-item"></li>
+		</ul> -->
     </div>
 
     <script src="node_modules/jquery/jquery.min.js" charset="utf-8"></script>
     <script src="node_modules/popper.js/dist/umd/popper.js" charset="utf-8"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
-    <script src="index.js"></script>
+    <script src="javascript/to_do_list.js"></script>
   </body>
 </html>
