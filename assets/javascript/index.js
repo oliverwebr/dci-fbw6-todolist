@@ -77,5 +77,5 @@ class toDoList {
 	}
 }
 
-var doIt = new toDoList();
+var instanceOfClass = new toDoList();
 
