@@ -3,7 +3,6 @@ class toDoList {
 	constructor () {
     this.db = JSON.parse(localStorage.getItem('item')) || [];
     this.db.state = this.db.state || false;
-
     		this.elements = {
 			item: document.querySelectorAll(".list-group li"),
 			submit: document.getElementById("itemSubmit"),
@@ -33,29 +32,17 @@ class toDoList {
 			btnClose.addEventListener("click", closeIt);
 			function closeIt() {
 				listItem.classList = "d-none";
-				//removeItem();
 			}
 
-/*			function removeItem(){
-				let key = ti
-				localStorage.removeItem(key);
-			}*/
 
-			let items = JSON.parse(localStorage.getItem('item')) || [];
-
-/*			for (var i = 0; i < items.length; i++) {
-				if (localStorage.title == items.title) {
-					console.log("Item title Exists");
-				}
-			}*/
-
-			items.push({title : document.getElementById("todo").value, state: false});
-			localStorage.setItem("item", JSON.stringify(items));
+			//this.db.push({title : document.getElementById("todo").value, state: false});
+			//localStorage.setItem("item", JSON.stringify(items));
 
 			// Clear Input Field After Submission
 			clearInput();
-		}
-
+			} 
+		
+		
 
 		// EventListener for clearing input field on click
 		this.elements.input.addEventListener("click", clearInput);
@@ -75,8 +62,9 @@ class toDoList {
 		function printList(){
 			window.print();
 		}
+    	this.db = JSON.parse(localStorage.getItem('item')) || [];
 
-		localStorage.setItem("item", JSON.stringify( {item: this.db.item, state: this.db.state, total: this.db.total } ));
+		//localStorage.setItem("item", JSON.stringify( {item: this.db.item, state: this.db.state, total: this.db.total } ));
 		//this.render();
 
 		let displayedList = document.querySelector('ul');
@@ -84,25 +72,10 @@ class toDoList {
   			if (ev.target.tagName === 'LI') {
     		ev.target.classList.toggle('checked');
   			}
-		}, false);
+		});
 
-		}
+	}
 
-/*    render(){
-    	this.db.items = this.db.items || []
-
-    	window.onload = dispSavedList;
-
-    	function dispSavedList(){
-    		let savedList = document.createElement('div')
-    		this.db.items.forEach( item => {
-      		let element = document.createElement('li');
-      		element.innerHTML = this.db.items;
-    		})
-    	}
-
-
-		}*/
 	}
 
 
