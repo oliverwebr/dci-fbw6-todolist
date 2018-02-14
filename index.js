@@ -10,25 +10,19 @@ class toDo {
 			items: document.querySelectorAll("li"),
 			template : document.getElementById('template')
 		},
+		this.render()
 		this.submitEventListener()
-		console.log(this.db);
+		
 	}
 	submitEventListener() {
 		this.elements.submit.addEventListener('click', (e)=>{
 			e.preventDefault();
 			var found = this.findItemKey(this.elements.input.value)
-			console.log(found)
-			console.log(this.db)
+			
 			if(found === undefined) {
-				var template = this.elements.template;
-				var template_clone = template.cloneNode(true);
-				template_clone.removeAttribute('id');
-				template_clone.classList.remove('d-none');
-				template_clone.innerHTML = this.elements.input.value;
-				this.elements.target.appendChild(template_clone);
 				this.db.push({title: this.elements.input.value, state: false})
 				localStorage.setItem("todolist", JSON.stringify(this.db))
-				this.elements.input.value = "";
+				this.render()
 			} else {
 				alert("Item already there")
 			}
@@ -42,23 +36,20 @@ class toDo {
         
     }
   }
-// updateList(item, remove = false){
-//     let itemKey = this.findItemKey(item)
-//     if(remove){
-//       if(this.db.items[itemKey].count > 1){
-//         this.db.items[itemKey].count--
-//       }else{
-//         this.db.items.shift(itemKey)
-//       }
-//     } else {
-//       if(itemKey !== undefined){
-//         this.db.items[itemKey].count++
-//       } else {
-//         this.db.items.push({title: this.db.items, state: false, count: 1})
-//       }
-//     }
-// }
-
+  	render() {
+  		var template = this.elements.template;
+		var wrapper = document.createElement("div")	 
+  		for (let i = 0; i < this.db.length; i++){
+			var template_clone = template.cloneNode(true);
+			template_clone.removeAttribute('id');
+			template_clone.classList.remove('d-none');
+			template_clone.innerHTML = this.db[i].title;
+			wrapper.appendChild(template_clone);
+			this.elements.input.value = "";
+	        
+	    }
+	    this.elements.target.innerHTML = wrapper.innerHTML
+  	}
 
 }
 var instaceOfCart = new toDo();
