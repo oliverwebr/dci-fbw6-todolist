@@ -12,8 +12,8 @@ class createTask {
 
    createNewTask() {
     this.elements.button.addEventListener('click', (e)=>{
-      e.preventDefault()
-
+      e.preventDefault();
+    
       var template = this.elements.template;
       var template_clone = template.cloneNode(true);
 
@@ -26,6 +26,14 @@ class createTask {
       if (this.elements.text.value != "") {
       template_clone.innerHTML = this.elements.text.value;
       this.elements.goal.appendChild(template_clone);
+
+      // Save task to localStorage
+      JSON.parse(localStorage.getItem("keep_element"));
+      var array = JSON.parse(localStorage.getItem("keep_element"));
+;
+      array.push({title: this.elements.text.value});
+
+      localStorage.setItem("keep_element", JSON.stringify(array));
 
  		} else if (this.elements.text.value == "") {
  		alert("You forgot your text, homie!");
