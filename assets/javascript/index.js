@@ -1,7 +1,10 @@
 
 class toDoList {
 	constructor () {
-		this.elements = {
+    this.db = JSON.parse(localStorage.getItem('item')) || [];
+    this.db.state = this.db.state || false;
+
+    		this.elements = {
 			item: document.querySelectorAll(".list-group li"),
 			submit: document.getElementById("itemSubmit"),
 			close: document.querySelectorAll("btn btn-sm btn-danger"),
@@ -46,14 +49,13 @@ class toDoList {
 				}
 			}*/
 
-			items.push({title : document.getElementById("todo").value, state: false})
+			items.push({title : document.getElementById("todo").value, state: false});
 			localStorage.setItem("item", JSON.stringify(items));
 
 			// Clear Input Field After Submission
 			clearInput();
 		}
 
-		//let input = document.getElementById("todo");
 
 		// EventListener for clearing input field on click
 		this.elements.input.addEventListener("click", clearInput);
@@ -74,8 +76,35 @@ class toDoList {
 			window.print();
 		}
 
+		localStorage.setItem("item", JSON.stringify( {item: this.db.item, state: this.db.state, total: this.db.total } ));
+		//this.render();
+
+		let displayedList = document.querySelector('ul');
+		displayedList.addEventListener('click', function(ev) {
+  			if (ev.target.tagName === 'LI') {
+    		ev.target.classList.toggle('checked');
+  			}
+		}, false);
+
+		}
+
+/*    render(){
+    	this.db.items = this.db.items || []
+
+    	window.onload = dispSavedList;
+
+    	function dispSavedList(){
+    		let savedList = document.createElement('div')
+    		this.db.items.forEach( item => {
+      		let element = document.createElement('li');
+      		element.innerHTML = this.db.items;
+    		})
+    	}
+
+
+		}*/
 	}
-}
+
 
 var instanceOfClass = new toDoList();
 
