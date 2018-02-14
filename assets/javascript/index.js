@@ -1,9 +1,8 @@
 
 class toDoList {
 	constructor () {
-    this.db = JSON.parse(localStorage.getItem('item')) || [];
-    this.db.state = this.db.state || false;
-    		this.elements = {
+    	this.db = JSON.parse(localStorage.getItem('item')) || [];
+		this.elements = {
 			item: document.querySelectorAll(".list-group li"),
 			submit: document.getElementById("itemSubmit"),
 			close: document.querySelectorAll("btn btn-sm btn-danger"),
@@ -16,8 +15,7 @@ class toDoList {
 
 	init () {
 
-		this.elements.submit.addEventListener("click", addListItem);
-		function addListItem(e) {
+		this.elements.submit.addEventListener("click",  (e)=> {
 			e.preventDefault();
 		    let listItem = document.createElement("li");
 		    listItem.classList += "list-group-item d-flex justify-content-between align-items-center list-sash";
@@ -29,20 +27,21 @@ class toDoList {
 			btnClose.innerHTML = `X`;
 			listItem.appendChild(btnClose);
 
-			btnClose.addEventListener("click", closeIt);
-			function closeIt() {
+			
+			btnClose.addEventListener("click", (e)=> {
 				listItem.classList = "d-none";
-			}
+			});
 
+			console.log(this.db)
 
-			//this.db.push({title : document.getElementById("todo").value, state: false});
-			//localStorage.setItem("item", JSON.stringify(items));
+            this.db.push({title:this.elements.input.value, state: false})
+            localStorage.setItem('todos', JSON.stringify(this.db));
 
 			// Clear Input Field After Submission
 			clearInput();
 			} 
 		
-		
+		);
 
 		// EventListener for clearing input field on click
 		this.elements.input.addEventListener("click", clearInput);
@@ -51,21 +50,15 @@ class toDoList {
 		}
 
 		// EventListener for clearing list and localStorage
-		this.elements.clear.addEventListener("click", clearAll);
-		function clearAll() {
+		this.elements.clear.addEventListener("click", (e)=> {
 			localStorage.clear();
 			window.location.reload();
-		}
+		});
 
 		// eventListener for calling Pring window
-		this.elements.print.addEventListener("click", printList);
-		function printList(){
+		this.elements.print.addEventListener("click", (e)=> {
 			window.print();
-		}
-    	this.db = JSON.parse(localStorage.getItem('item')) || [];
-
-		//localStorage.setItem("item", JSON.stringify( {item: this.db.item, state: this.db.state, total: this.db.total } ));
-		//this.render();
+		});
 
 		let displayedList = document.querySelector('ul');
 		displayedList.addEventListener('click', function(ev) {
@@ -76,8 +69,9 @@ class toDoList {
 
 	}
 
-	}
+ 	}
 
 
 var instanceOfClass = new toDoList();
 
+//finditemkey
