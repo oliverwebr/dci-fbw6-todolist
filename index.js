@@ -9,10 +9,17 @@ class Todo {
     }
     this.formEventListener()
     this.render()
+    document.addEventListener("blur", (e) => {
+      if(e.target.classList.contains('title'))
+        this.updateCart(e.target.parentElement.dataset.name, false, false, true)
+    }, true); 
     document.addEventListener('click', (e)=>{
       if(e.target && e.target.classList.contains( 'btn-outline-danger' )){
-        let itemKey = this.findItemKey(e.target.dataset.name)
+        let itemKey = this.findItemKey(e.target.parentElement.dataset.name)
         this.updateCart(e.target.dataset.name, true)
+      } else if(e.target.classList.contains( 'checkbutton' )){
+        let itemKey = this.findItemKey(e.target.parentElement.dataset.name)
+        this.updateCart(e.target.parentElement.dataset.name, false, true)
       }
     })
   }
@@ -30,11 +37,15 @@ class Todo {
       }
     }
   }
-  updateCart(item, remove = false){
+  updateCart(item, remove = false, check = false, change = false){
     let itemKey = this.findItemKey(item)
-    console.log(this.db)
-    console.log(itemKey)
-    if(remove) {
+    if ( change ) {
+      this.db[this.findItemKey(event.target.parentElement.dataset.name)].title = event.target.innerHTML
+    }
+    else if ( check ) {
+      this.db[itemKey].state = !this.db[itemKey].state
+    }
+    else if(remove) {
       this.db.splice(itemKey, 1)
     } else{  
       if(itemKey === undefined) {
@@ -54,7 +65,14 @@ class Todo {
       element.removeAttribute("id");
       element.classList.add("d-flex")
       element.classList.remove("d-none")
-      element.querySelector('.btn-outline-danger').dataset.name = this.db[item].title
+      if(this.db[item].state) {
+        element.classList.add("list-group-item-light");
+        element.querySelector('.checkbutton').innerHTML = "todo"
+        element.querySelector('.checkbutton').classList.remove('btn-outline-success')
+        element.querySelector('.checkbutton').classList.add('btn-success')
+        //element.querySelector('.checkbutton').classList.remove('checkbutton')
+      }
+      element.querySelector('.btn-outline-danger').parentElement.dataset.name = this.db[item].title
 
       element.querySelector('.title').innerHTML = this.db[item].title
       container.appendChild(element);
