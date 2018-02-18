@@ -60,6 +60,12 @@ class Todo {
   render(){
     var card = this.elements.template
     var container = document.createElement("ul")
+    if(window.location.search.substr(1) === "state=false"){
+      this.db = this.db.filter((i) => !i.state)
+    } else if (window.location.search.substr(1) === "state=true") {
+      this.db = this.db.filter((i) => i.state)
+    }
+
     for (var item in this.db ) {
       var element = card.cloneNode(true);
       element.removeAttribute("id");
