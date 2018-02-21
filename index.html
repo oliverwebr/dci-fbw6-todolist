@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>TODO - List</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="h-100">
+
+    <div class="my-5">
+    <div class="container pt-5">
+      <h1>Add Todo:</h1>
+      <label for="todo">Title</label>
+      <form action="#" class=" form-inline mb-5">
+        <div class="form-group">
+          <input type="text" class="form-control mr-2 w-100" value="milk" id="input" aria-describedby="emailHelp" name="input" placeholder="Buy milk">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+
+      <h1>Todos:</h1>
+      <small class="text-success">
+        <a class="text-success mr-1"href="?state=false">show open</a>
+        <a class="text-success mr-1"href="?state=true">show done</a>
+        <a class="text-success mr-1"href="./index.html">show all</a>
+      </small>
+      <ul class="list-group">
+        <li id="template" class="bg-dark list-group-item d-none justify-content-between align-items-center">
+
+          <button class="btn btn-sm checkbutton btn-outline-success">done</button>
+          <span contenteditable="true" class="title">Cras justo odio</span>
+          <button class="btn btn-sm btn-outline-danger">X</button>
+        </li>
+      </ul>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
