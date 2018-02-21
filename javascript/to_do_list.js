@@ -1,52 +1,62 @@
 class createTask {
-	constructor()	 {
-		// this.db = JSON.parse(localStorage.getItem("keep_element")) || [];
-		this.elements = {
-		text: document.getElementById("textarea"),
-		button: document.querySelector(".btn"),
-		clear: document.querySelector("#clear"),
-      	goal: document.getElementById("new_list"),
-		template: document.getElementById("new_list_element")
-		}
-		this.createNewTask();
-		this.x_task();
-		// this.render();
-	}
+    constructor() {
+        // this.db = JSON.parse(localStorage.getItem("keep_element")) || [];
+        this.elements = {
+            text: document.getElementById("textarea"),
+            button: document.querySelector(".btn"),
+            clear: document.querySelector("#clear"),
+            goal: document.getElementById("new_list"),
+            template: document.getElementById("new_list_element")
+        }
+        this.createNewTask();
+        this.x_task();
+        // for items which will be created later
+        document.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (e.target.classList.contains("btn-outline-danger")) {
+   	            console.log(e.target);
+   	            e.target.parentElement.remove();
+            }
+            // this.elements.goal.innerHTML = "";
 
-   	createNewTask() {
-    	this.elements.button.addEventListener('click', (e) => {
-      	e.preventDefault();
-      	// Save task to localStorage
-		
-		if (this.elements.text.value != "") {
-      	// this.render()
-      	var template_clone = this.elements.template.cloneNode(true);
+        })
+        // this.render();
+    }
 
-      	// remove the id, 'cos id may not be used twice
-      	template_clone.removeAttribute("id");
+    createNewTask() {
+        this.elements.button.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Save task to localStorage
 
-     	//remove class d-none to make the clone visible
-	    template_clone.classList.remove("d-none");
-	    template_clone.classList.add("d-flex", "justify-content-between");
-		template_clone.querySelector(".title").innerHTML = this.elements.text.value;
+            if (this.elements.text.value != "") {
+                // this.render()
+                var template_clone = this.elements.template.cloneNode(true);
 
-      	this.elements.goal.appendChild(template_clone);
-      	// this.elements.clear.classList.remove("d-none");
- 		} else if (this.elements.text.value == "") {
- 		alert("You forgot your text, homie!");
- 		}
+                // remove the id, 'cos id may not be used twice
+                template_clone.removeAttribute("id");
 
-	    this.elements.text.value = "";
-		})
+                //remove class d-none to make the clone visible
+                template_clone.classList.remove("d-none");
+                template_clone.classList.add("d-flex", "justify-content-between");
+                template_clone.querySelector(".title").innerHTML = this.elements.text.value;
+
+                this.elements.goal.appendChild(template_clone);
+                // this.elements.clear.classList.remove("d-none");
+            } else if (this.elements.text.value == "") {
+                alert("You forgot your text, homie!");
+            }
+
+            this.elements.text.value = "";
+        })
     }
 
     x_task() {
-	    this.elements.clear.addEventListener('click', (e) => {
-      	e.preventDefault();
+        // this.elements.clear.addEventListener('click', (e) => {
+        //     e.preventDefault();
 
-      	this.elements.goal.innerHTML = "";
+        //     this.elements.goal.innerHTML = "";
 
-      	})
-    }    
+        // })
+    }
 }
 var newTask = new createTask();
