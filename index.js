@@ -73,28 +73,29 @@ class Todo {
     var card = this.elements.template
     var container = document.createElement("ul")
     // here jumps in the query parameter depending on that I filter my db
+    var local_db = this.db;
     if(window.location.search.substr(1) === "state=false"){
-      this.db = this.db.filter((i) => !i.state)
+      local_db = this.db.filter((i) => !i.state)
     } else if (window.location.search.substr(1) === "state=true") {
-      this.db = this.db.filter((i) => i.state)
+      local_db = this.db.filter((i) => i.state)
     }
 
     // actuall rendering
-    for (var item in this.db ) {
+    for (var item in local_db ) {
       var element = card.cloneNode(true);
       element.removeAttribute("id");
       element.classList.add("d-flex")
       element.classList.remove("d-none")
       // if my element is marked as done I change the layout of the <li>
-      if(this.db[item].state) {
+      if(local_db[item].state) {
         element.classList.add("list-group-item-light");
         element.querySelector('.checkbutton').innerHTML = "todo"
         element.querySelector('.checkbutton').classList.remove('btn-outline-success')
         element.querySelector('.checkbutton').classList.add('btn-success')
       }
-      element.querySelector('.btn-outline-danger').parentElement.dataset.name = this.db[item].title
+      element.querySelector('.btn-outline-danger').parentElement.dataset.name = local_db[item].title
 
-      element.querySelector('.title').innerHTML = this.db[item].title
+      element.querySelector('.title').innerHTML = local_db[item].title
       container.appendChild(element);
     }
     this.elements.list.innerHTML = container.innerHTML;
