@@ -11,19 +11,24 @@
     <div class="container my-3">
       <h5>Add Task</h5>
       <!-- here comes the form -->
-     	<form>
-      		<div class="form-group">
+    <form>
+      	<div class="form-group">
     			<label for="exampleFormControlTextarea1">Here you can add a new task</label>
     			<input class="form-control" value="" id="textarea" rows="1" placeholder="New Task">
- 			</div>
+ 			  </div>
  			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 
       <h5 id="h5_id">List</h5>
       <!-- here comes the list of todos -->
-      	<ul id="new_list" class="list-group"></ul>
+      	<ul id="new_list" class="list-group">
+         
+        </ul>
 		<!-- template -->
-		<li class="list-group-item d-none" id="new_list_element"></li>
+		<li class="list-group-item d-none" id="new_list_element"><span class="title"></span>
+      <button type="button" class="btn btn-primary" id="clear">X</button>
+    </li>
+
     </div>
 
     <script src="node_modules/jquery/jquery.min.js" charset="utf-8"></script>
