@@ -9,18 +9,14 @@ class createTask {
             template: document.getElementById("new_list_element")
         }
         this.createNewTask();
-        this.x_task();
-        // for items which will be created later
+        // clear button for items which will be created later
         document.addEventListener('click', (e) => {
             e.preventDefault();
             if (e.target.classList.contains("btn-outline-danger")) {
-   	            console.log(e.target);
-   	            e.target.parentElement.remove();
+                console.log(e.target);
+                e.target.parentElement.remove();
             }
-            // this.elements.goal.innerHTML = "";
-
         })
-        // this.render();
     }
 
     createNewTask() {
@@ -29,7 +25,6 @@ class createTask {
             // Save task to localStorage
 
             if (this.elements.text.value != "") {
-                // this.render()
                 var template_clone = this.elements.template.cloneNode(true);
 
                 // remove the id, 'cos id may not be used twice
@@ -48,15 +43,6 @@ class createTask {
 
             this.elements.text.value = "";
         })
-    }
-
-    x_task() {
-        // this.elements.clear.addEventListener('click', (e) => {
-        //     e.preventDefault();
-
-        //     this.elements.goal.innerHTML = "";
-
-        // })
     }
 }
 var newTask = new createTask();
