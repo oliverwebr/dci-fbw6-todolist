@@ -9,8 +9,11 @@ class Todo {
     }
     this.formEventListener()
     this.render()
+    // when you click the title of a todo it turns into a input field
+    // this can be edited and when you tab out of the field the BLUR event triggers on this input
     document.addEventListener("blur", (e) => {
       if(e.target.classList.contains('title'))
+        // I trigger the update cart method. This time I give the unchanged item name to the method and let the method it self handle the update. LINE 50
         this.updateCart(e.target.parentElement.dataset.name, false, false, true)
     }, true);
     document.addEventListener('click', (e)=>{
@@ -30,16 +33,21 @@ class Todo {
       this.elements.input.value = ""
     })
   }
+  // find item in the db that has the same name as passed and returns its index
   findItemKey(itemName){
     for (let i = 0; i < this.db.length; i++){
-      if (this.db[i].title == itemName){
+      // to lowercase because "Milk" would not match with "milk"
+      if (this.db[i].title.toLowerCase() == itemName.toLowerCase()){
         return i
       }
     }
   }
+  // method can be run with different options. Depending on their state I update/delete/check items
   updateCart(item, remove = false, check = false, change = false){
     let itemKey = this.findItemKey(item)
+
     if ( change ) {
+      // this should actually come in the render method but Im going to holiday tomorrow
       this.db[this.findItemKey(event.target.parentElement.dataset.name)].title = event.target.innerHTML
     }
     else if ( check ) {
@@ -51,32 +59,38 @@ class Todo {
       if(itemKey === undefined) {
         this.db.push({title: this.elements.input.value, state: false})
       } else {
-        console.log("item already there")
+        alert("Item already there")
       }
     }
+    // sorts the db by done/todo
+    this.db = this.db.sort(function(x, y) {
+        return (x.state === y.state)? 0 : x.state? 1 : -1;
+    });
     localStorage.setItem("todos", JSON.stringify( this.db ))
     this.render()
   }
   render(){
     var card = this.elements.template
     var container = document.createElement("ul")
+    // here jumps in the query parameter depending on that I filter my db
     if(window.location.search.substr(1) === "state=false"){
       this.db = this.db.filter((i) => !i.state)
     } else if (window.location.search.substr(1) === "state=true") {
       this.db = this.db.filter((i) => i.state)
     }
 
+    // actuall rendering
     for (var item in this.db ) {
       var element = card.cloneNode(true);
       element.removeAttribute("id");
       element.classList.add("d-flex")
       element.classList.remove("d-none")
+      // if my element is marked as done I change the layout of the <li>
       if(this.db[item].state) {
         element.classList.add("list-group-item-light");
         element.querySelector('.checkbutton').innerHTML = "todo"
         element.querySelector('.checkbutton').classList.remove('btn-outline-success')
         element.querySelector('.checkbutton').classList.add('btn-success')
-        //element.querySelector('.checkbutton').classList.remove('checkbutton')
       }
       element.querySelector('.btn-outline-danger').parentElement.dataset.name = this.db[item].title
 
