@@ -12,11 +12,11 @@ class Todo {
     document.addEventListener("blur", (e) => {
       if(e.target.classList.contains('title'))
         this.updateCart(e.target.parentElement.dataset.name, false, false, true)
-    }, true); 
+    }, true);
     document.addEventListener('click', (e)=>{
       if(e.target && e.target.classList.contains( 'btn-outline-danger' )){
         let itemKey = this.findItemKey(e.target.parentElement.dataset.name)
-        this.updateCart(e.target.dataset.name, true)
+        this.updateCart(e.target.parentElement.dataset.name, true)
       } else if(e.target.classList.contains( 'checkbutton' )){
         let itemKey = this.findItemKey(e.target.parentElement.dataset.name)
         this.updateCart(e.target.parentElement.dataset.name, false, true)
@@ -25,7 +25,7 @@ class Todo {
   }
   formEventListener() {
     this.elements.button.addEventListener('click', (e)=>{
-      e.preventDefault(); 
+      e.preventDefault();
       this.updateCart(this.elements.input.value)
       this.elements.input.value = ""
     })
@@ -47,7 +47,7 @@ class Todo {
     }
     else if(remove) {
       this.db.splice(itemKey, 1)
-    } else{  
+    } else{
       if(itemKey === undefined) {
         this.db.push({title: this.elements.input.value, state: false})
       } else {
