@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <meta charset="utf-8">
     <title>TODO - List</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body class="h-100">
 
-    <div class="container my-3">
+    <div class="my-5">
+    <div class="container pt-5">
       <h1>Add Todo:</h1>
       <label for="todo">Title</label>
       <form action="#" class=" form-inline mb-5">
         <div class="form-group">
           <input type="text" class="form-control mr-2 w-100" value="milk" id="input" aria-describedby="emailHelp" name="input" placeholder="Buy milk">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
       </form>
 
       <h1>Todos:</h1>
-      <small>
-        <a class="mr-1"href="?state=false">show open</a>
-        <a class="mr-1"href="?state=true">show done</a>
-        <a class="mr-1"href="./index.html">show all</a>
+      <small class="text-success">
+        <a class="text-success mr-1"href="?state=false">show open</a>
+        <a class="text-success mr-1"href="?state=true">show done</a>
+        <a class="text-success mr-1"href="./index.html">show all</a>
       </small>
       <ul class="list-group">
-        <li id="template" class="list-group-item d-none justify-content-between align-items-center">
+        <li id="template" class="bg-dark list-group-item d-none justify-content-between align-items-center">
 
           <button class="btn btn-sm checkbutton btn-outline-success">done</button>
           <span contenteditable="true" class="title">Cras justo odio</span>
