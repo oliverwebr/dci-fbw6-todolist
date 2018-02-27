@@ -23,6 +23,7 @@ class Todo {
       } else if(e.target.classList.contains( 'checkbutton' )){
         let itemKey = this.findItemKey(e.target.parentElement.dataset.name)
         this.updateCart(e.target.parentElement.dataset.name, false, true)
+        
       }
     })
   }
@@ -88,6 +89,7 @@ class Todo {
       element.classList.remove("d-none")
       // if my element is marked as done I change the layout of the <li>
       if(local_db[item].state) {
++
         element.classList.add("list-group-item-light");
         element.querySelector('.checkbutton').innerHTML = "todo"
         element.querySelector('.checkbutton').classList.remove('btn-outline-success')
@@ -104,4 +106,3 @@ class Todo {
 
 }
 var instaceOfTodo = new Todo();
-
