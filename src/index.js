@@ -1,5 +1,6 @@
 class Todo {
   constructor () {
+    
     this.db = JSON.parse( localStorage.getItem('todos') ) || [];
     this.elements = {
       list: document.querySelector('ul.list-group'),
