@@ -6,11 +6,17 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "jquery": "^1.12.4",
-    "popper.js": "^1.12.9"
+    "popper.js": "^1.12.9",
+    "webpack": "^4.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "webpack-cli": "^2.0.9"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-cli",
+    "watch": "webpack-cli --watch",
+    "clean": "rm -rf ./dist"
   },
   "repository": {
     "type": "git",
