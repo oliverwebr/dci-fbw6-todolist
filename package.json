@@ -13,7 +13,9 @@
     "webpack-cli": "^2.0.9"
   },
   "scripts": {
-    "start": "webpack-cli --watch"
+    "build": "webpack-cli",
+    "watch": "webpack-cli --watch",
+    "clean": "rm -rf ./dist"
   },
   "repository": {
     "type": "git",
