@@ -10,11 +10,14 @@
     "webpack": "^4.0.1"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
     "webpack-cli": "^2.0.9"
   },
   "scripts": {
-    "start":"webpack-cli --watch",
-    "clean":"rm -rf ./dist"
+    "build":"webpack-cli",
+    "start": "webpack-cli --watch",
+    "clean": "rm -rf ./dist"
   },
   "repository": {
     "type": "git",
